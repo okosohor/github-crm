@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+tsconfig.tsbuildinfo
+
+# Environment variables
+.env
+.env.*.local
+
+# Logs
+logs/
+*.log
+*.out
+*.pid
+
+# Coverage
+coverage/
+lcov-report/
