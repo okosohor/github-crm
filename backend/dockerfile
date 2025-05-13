@@ -1,0 +1,20 @@
+# Використовуємо базовий образ для Node.js
+FROM node:16
+
+# Встановлюємо робочу директорію
+WORKDIR /app
+
+# Копіюємо package.json та package-lock.json
+COPY package*.json ./
+
+# Встановлюємо залежності
+RUN npm install
+
+# Копіюємо весь код в контейнер
+COPY . .
+
+# Виставляємо порт для контейнера
+EXPOSE 4444
+
+# Запускаємо сервер через npm run start для продакшн
+CMD ["npm", "run", "start"]
