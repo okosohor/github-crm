@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const { createDataBaseConection } = require('./utils/db');
+const {createDataBaseConection} = require('./config/db');
 
 dotenv.config();
 
@@ -12,11 +12,12 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/health', (req, res) => {
-  res.json({ status: 'OK' });
+  res.json({status: 'OK'});
 });
 
 createDataBaseConection();
 
 app.listen(port, () => {
   console.log(`Backend listening on port ${port}`);
+  console.log('Current environment:', process.env.NODE_ENV);
 });

@@ -7,10 +7,10 @@ module.exports = [
     ignores: ['node_modules', 'dist', 'eslint.config.js'],
   },
   {
-    files: ['**/*.js'],  
+    files: ['**/*.js'],
     languageOptions: {
       parserOptions: {
-        ecmaVersion: 2020,  
+        ecmaVersion: 2020,
         sourceType: 'module',
       },
       globals: {
@@ -24,9 +24,10 @@ module.exports = [
       prettier: eslintPluginPrettier,
     },
     rules: {
-      ...eslintConfigPrettier.rules, 
-      'prettier/prettier': 'error',  
-      'no-console': 'warn',  
+      ...eslintConfigPrettier.rules,
+      'prettier/prettier': 'error',
+      'object-curly-spacing': 'off',
+      'no-console': 'warn',
       'spaced-comment': [
         'warn',
         'always',
@@ -38,8 +39,8 @@ module.exports = [
       'no-unused-vars': [
         'error',
         {
-          argsIgnorePattern: '^_', 
-          varsIgnorePattern: '^_',  
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
         },
       ],
     },
