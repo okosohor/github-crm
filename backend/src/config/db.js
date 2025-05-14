@@ -18,4 +18,4 @@ const createDataBaseConection = async () => {
   }
 };
 
-module.exports = { createDataBaseConection };
+module.exports = { createDataBaseConection, sequelize };

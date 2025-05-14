@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const UserRepository = require('../repositories/userRepository');
 const dotenv = require('dotenv');
+const comparePassword = require('../utils/helpers/comparePassword');
 
 dotenv.config();
 
@@ -12,13 +13,13 @@ class AuthService {
     };
 
     // TODO: add time
-    const accesToken = jwt.sign(data, process.env.JWT_SECRET_KEY, { expiresIn: '5m' });
+    const accessToken = jwt.sign(data, process.env.JWT_SECRET_KEY, { expiresIn: '5m' });
     const refreshToken = jwt.sign(data, process.env.JWT_SECRET_KEY, { expiresIn: '10m' });
 
-    return { accesToken, refreshToken };
+    return { accessToken, refreshToken };
   }
 
-  async refreshAccesToken() {
+  async refreshAccessToken() {
     try {
       const verified = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET_KEY);
       return this.generateTokens({ id: verified.userId, email: verified.email });
@@ -32,13 +33,17 @@ class AuthService {
     if (!user) {
       throw new Error('Check your email or password');
     }
+    console.log('2 pass', password, user.password);
 
     const isCorrectPassword = await comparePassword(password, user.password);
+
+    console.log('correct pass', isCorrectPassword);
     if (!isCorrectPassword) {
       throw new Error('Check your email or password');
     }
 
-    return this.generateTokens(user);
+    console.log('auth service login user', await this.generateTokens(user));
+    return await this.generateTokens(user);
   }
 }
 
