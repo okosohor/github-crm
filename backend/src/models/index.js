@@ -1,4 +1,4 @@
-const {sequelize} = require('../config/db');
+const { sequelize } = require('../config/db');
 const User = require('./user');
 const Project = require('./project');
 const UserProject = require('./userProject');
@@ -16,7 +16,7 @@ Project.belongsToMany(User, {
 });
 
 sequelize
-  .sync({force: false})
+  .sync({ force: false })
   .then(() => {
     console.log('Sync');
   })
