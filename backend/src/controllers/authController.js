@@ -11,7 +11,7 @@ class AuthController {
         maxAge: 1000 * 60 * 60 * 24 * 10, // 10days
       });
 
-      res.status(200).json({ message: 'Login complete', accessToken });
+      res.status(200).json({ message: 'Login complete', accessToken, refreshToken });
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
@@ -31,19 +31,16 @@ class AuthController {
 
   async refresh(req, res) {
     try {
-      const { refreshToken } = req.cookies;
-      if (!refreshToken) {
+      const refreshTokenFromBody = req.body.refreshToken;
+      if (!refreshTokenFromBody) {
         throw new Error('Refresh token not found');
       }
 
-      const { accessToken, refreshToken: newRefreshToken } =
-        await AuthService.refreshAccessToken(refreshToken);
+      const { accessToken, refreshToken } =
+        await AuthService.refreshAccessToken(refreshTokenFromBody);
 
-      res.cookie('refreshToken', newRefreshToken, {
-        maxAge: 1000 * 60 * 60 * 24 * 10,
-      });
-
-      res.status(200).json({ accessToken });
+      console.log(accessToken, refreshToken);
+      res.status(200).json({ accessToken, refreshToken });
     } catch (err) {
       res.status(400).json({ message: err.message });
     }

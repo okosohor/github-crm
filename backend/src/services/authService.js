@@ -14,14 +14,17 @@ class AuthService {
 
     // TODO: add time
     const accessToken = jwt.sign(data, process.env.JWT_SECRET_KEY, { expiresIn: '5m' });
-    const refreshToken = jwt.sign(data, process.env.JWT_SECRET_KEY, { expiresIn: '10m' });
+    const refreshToken = jwt.sign(data, process.env.JWT_REFRESH_SECRET_KEY, { expiresIn: '10m' });
 
     return { accessToken, refreshToken };
   }
 
-  async refreshAccessToken() {
+  async refreshAccessToken(refreshToken) {
     try {
+      console.log('ref acc', refreshToken);
       const verified = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET_KEY);
+
+      console.log(verified);
       return this.generateTokens({ id: verified.userId, email: verified.email });
     } catch (err) {
       throw new Error('Invalid or expired refresh token:', err);
