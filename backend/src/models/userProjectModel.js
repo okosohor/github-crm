@@ -11,7 +11,7 @@ UserProject.init(
       autoIncrement: true,
       allowNull: false,
     },
-    userId: {
+    user_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'users',
@@ -20,14 +20,13 @@ UserProject.init(
       allowNull: false,
       field: 'user_id',
     },
-    projectId: {
+    project_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'projects',
         key: 'id',
       },
       allowNull: false,
-      field: 'project_id',
     },
   },
   {

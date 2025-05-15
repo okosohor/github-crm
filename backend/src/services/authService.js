@@ -8,7 +8,7 @@ dotenv.config();
 class AuthService {
   async generateTokens(user) {
     const data = {
-      userId: user.data,
+      id: user.id,
       email: user.email,
     };
 

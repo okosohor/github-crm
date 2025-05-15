@@ -1,4 +1,3 @@
-// src/models/user.js
 const { Model, DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
 
@@ -32,7 +31,7 @@ User.init(
     sequelize,
     modelName: 'User',
     tableName: 'users',
-    timestamps: true,
+    timestamps: false,
   },
 );
 

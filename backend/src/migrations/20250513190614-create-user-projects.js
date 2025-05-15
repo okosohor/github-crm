@@ -1,10 +1,15 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
-// src/migrations/[timestamp]-create-user-projects.js
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('user_projects', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
       user_id: {
         type: Sequelize.INTEGER,
         references: {
@@ -12,6 +17,7 @@ module.exports = {
           key: 'id',
         },
         allowNull: false,
+        field: 'user_id',
       },
       project_id: {
         type: Sequelize.INTEGER,
@@ -20,6 +26,7 @@ module.exports = {
           key: 'id',
         },
         allowNull: false,
+        field: 'project_id',
       },
     });
   },

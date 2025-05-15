@@ -28,6 +28,7 @@ class AuthController {
       res.status(401).json({ message: err.message });
     }
   }
+
   async refresh(req, res) {
     try {
       const { refreshToken } = req.cookies;

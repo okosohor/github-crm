@@ -25,9 +25,12 @@ module.exports = [
     },
     rules: {
       ...eslintConfigPrettier.rules,
-      'prettier/prettier': ['error', {
-        "bracketSpacing": true
-      }],
+      'prettier/prettier': [
+        'error',
+        {
+          bracketSpacing: true,
+        },
+      ],
       'object-curly-spacing': 'off',
       'no-console': 'warn',
       'spaced-comment': [

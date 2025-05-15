@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const sequalize = require('../config/db');
+const { sequelize } = require('../config/db');
 
 class Project extends Model {}
 
@@ -9,6 +9,10 @@ Project.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+      allowNull: false,
+    },
+    full_name: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     owner: {
@@ -37,10 +41,10 @@ Project.init(
     },
   },
   {
-    sequalize,
+    sequelize,
     modelName: 'Project',
     tableName: 'projects',
-    timestamps: true,
+    timestamps: false,
   },
 );
 
