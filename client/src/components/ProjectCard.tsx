@@ -19,7 +19,7 @@ export default function ProjectCard({ project, removeProject, updateProject }: P
       await API.deleteUserProject(id);
       removeProject(id);
     } catch (error) {
-      setError('Delete project error')
+      setError('Delete project error');
     }
   }
 
@@ -29,7 +29,7 @@ export default function ProjectCard({ project, removeProject, updateProject }: P
 
       updateProject(response.data.id, response.data);
     } catch (err: any) {
-      setError('Update project error')
+      setError('Update project error');
     }
   }
 
@@ -48,7 +48,7 @@ export default function ProjectCard({ project, removeProject, updateProject }: P
           {full_name}
         </a>
         <div className="flex gap-2 mb-2 md:mb-0">
-          {error && <span className='text-red-500'>{error}</span>}
+          {error && <span className="text-red-500">{error}</span>}
           <button onClick={handleUpdate} className="text-gray-800 hover:text-green-500">
             <UpdateIcon />
           </button>

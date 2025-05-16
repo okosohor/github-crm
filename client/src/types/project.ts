@@ -7,5 +7,5 @@ export interface Project {
   stars: number;
   forks: number;
   issues: number;
-  created_at:string;
+  created_at: string;
 }

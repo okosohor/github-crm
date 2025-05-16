@@ -8,14 +8,19 @@ import Input from 'ui/Input';
 interface Props {
   addProject: (project: Project) => void;
   removeAllProjectsFromList: () => void;
-  updateProject:(id: number, data: Project) => void;
+  updateProject: (id: number, data: Project) => void;
   projects: Project[];
 }
 
-export default function AddProjectBlock({ addProject, removeAllProjectsFromList, updateProject, projects}: Props) {
+export default function AddProjectBlock({
+  addProject,
+  removeAllProjectsFromList,
+  updateProject,
+  projects,
+}: Props) {
   const [url, setUrl] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   async function handleAddProject() {
     if (!url) {
@@ -26,13 +31,11 @@ export default function AddProjectBlock({ addProject, removeAllProjectsFromList,
     try {
       const response = await API.createOrUpdateProject(url);
 
-     if(
-      projects.find(project => project.id === response.data.id)
-     ) {
-      updateProject(response.data.id, response.data)
-     } else {
-       addProject(response.data);
-     }
+      if (projects.find(project => project.id === response.data.id)) {
+        updateProject(response.data.id, response.data);
+      } else {
+        addProject(response.data);
+      }
 
       setUrl('');
       setError('');
@@ -48,14 +51,14 @@ export default function AddProjectBlock({ addProject, removeAllProjectsFromList,
   async function handleRemoveAllProjects() {
     try {
       await API.deleteAllUserProjects();
-      removeAllProjectsFromList()
+      removeAllProjectsFromList();
     } catch (error) {
-      setError('Something went wrong please try again later')
+      setError('Something went wrong please try again later');
     }
   }
 
   function handleLogout() {
-    navigate('/')
+    navigate('/');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('accessToken');
   }

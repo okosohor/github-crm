@@ -13,41 +13,40 @@ export default function RegisterTab() {
   const [registerError, setRegisterError] = useState('');
   const [registerMessage, setRegisterMessage] = useState('');
 
-
   function validateEmail(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
   async function handleRegister(event: React.FormEvent) {
     event.preventDefault();
-  
+
     setEmailError('');
     setPasswordError('');
     setConfirmPasswordError('');
     setRegisterError('');
     setRegisterMessage('');
-  
+
     let hasError = false;
-  
+
     if (!validateEmail(email)) {
       setEmailError('Please enter a valid email');
       hasError = true;
     }
-  
+
     if (password.length < 4) {
       setPasswordError('Password must be at least 4 characters');
       hasError = true;
     }
-  
+
     if (password !== confirmPassword) {
       setConfirmPasswordError('Passwords do not match');
       hasError = true;
     }
-  
+
     if (hasError) {
       return;
     }
-  
+
     try {
       const { data } = await API.register({ email, password });
       setEmail('');
@@ -63,7 +62,13 @@ export default function RegisterTab() {
     <form className="flex justify-between flex-col h-full" onSubmit={handleRegister}>
       <div className="gap-5 flex flex-col">
         <Input type="email" name="email" value={email} handleChange={setEmail} error={emailError} />
-        <Input type="password" name="password" value={password} handleChange={setPassword} error={passwordError} />
+        <Input
+          type="password"
+          name="password"
+          value={password}
+          handleChange={setPassword}
+          error={passwordError}
+        />
         <Input
           type="password"
           name="confirm password"

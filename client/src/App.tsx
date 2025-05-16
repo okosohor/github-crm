@@ -6,7 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
   useEffect(() => {
-    document.title = "GitHub CRM";
+    document.title = 'GitHub CRM';
   }, []);
   return (
     <Router>

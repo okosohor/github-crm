@@ -9,10 +9,10 @@ export function useAuthRedirect() {
       navigate('/');
     };
 
-    window.addEventListener("removeTokens", handleRemoveTokens);
+    window.addEventListener('removeTokens', handleRemoveTokens);
 
     return () => {
-      window.removeEventListener("removeTokens", handleRemoveTokens);
+      window.removeEventListener('removeTokens', handleRemoveTokens);
     };
   }, [navigate]);
 }
