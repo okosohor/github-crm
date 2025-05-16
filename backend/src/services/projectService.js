@@ -1,14 +1,13 @@
 const ProjectRepository = require('../repositories/projectRepository');
 const UserProjectRepository = require('../repositories/userProjectRepository');
 const gitHubService = require('./gitHubService');
-// const { sequelize } = require('../config/db');
 const projectRepository = require('../repositories/projectRepository');
 
 class ProjectService {
-  async createProject(url, userId) {
+  // TODO create more services  for createorupdate
+  async createOrUpdateProject(url, userId) {
     const [owner, name] = url.split('/');
     try {
-      console.log('try');
       const repoData = await gitHubService.getRepoData(owner, name);
       const newProject = {
         full_name: repoData.full_name,
@@ -18,19 +17,19 @@ class ProjectService {
         stars: repoData.stargazers_count,
         forks: repoData.forks_count,
         issues: repoData.open_issues_count,
+        created_at: repoData.created_at,
       };
 
       const projectInDb = await projectRepository.getProjectByFullName(repoData.full_name);
 
       let createdOrUpdatedProject;
-      // TODO add user id
-      //TOTO CREATE TRANSACTION
 
       if (projectInDb) {
         const updatedProject = await ProjectRepository.updateProjectById(
           projectInDb.id,
           newProject,
         );
+
         createdOrUpdatedProject = updatedProject;
         const userProject = await UserProjectRepository.checkIfUserHaveProject(
           userId,
@@ -51,21 +50,15 @@ class ProjectService {
             project_id: createdProject.id,
           });
         } catch (err) {
-          throw new Error('Error create project', err.message);
+          throw new Error('Error create project' + err.message);
         }
       }
-      return { createdOrUpdatedProject };
+      return createdOrUpdatedProject;
     } catch (err) {
-      throw new Error('Create project error service', err);
-    }
-  }
-
-  async updateProject(id, data) {
-    try {
-      const updatedProject = await ProjectRepository.updateProjectById(id, data);
-      return updatedProject;
-    } catch (err) {
-      throw new Error(err);
+      if ('' + err === 'Error: Not Found') {
+        throw new Error('Project not found on GitHub');
+      }
+      throw new Error('Create project error:' + err);
     }
   }
 
@@ -80,7 +73,8 @@ class ProjectService {
 
   async findProjectsByUserId(id) {
     try {
-      const projects = await ProjectRepository.findProjectsByUserId(id);
+      const projectIds = await UserProjectRepository.getUserProjectsIds(id);
+      const projects = ProjectRepository.getProjectsByIds(projectIds);
       return projects;
     } catch (err) {
       throw new Error(err);

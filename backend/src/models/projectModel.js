@@ -39,6 +39,10 @@ Project.init(
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
   },
   {
     sequelize,

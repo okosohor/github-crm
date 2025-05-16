@@ -6,7 +6,7 @@ class ProjectRepository {
       const createdProject = await Project.create(data);
       return createdProject;
     } catch (err) {
-      throw new Error('Create project error repo:', err);
+      throw new Error('Create project error repo:' + err);
     }
   }
 
@@ -15,7 +15,7 @@ class ProjectRepository {
       const project = await Project.findByPk(id);
       return project;
     } catch (err) {
-      throw new Error('Find project error:', err);
+      throw new Error('Find project error:' + err);
     }
   }
 
@@ -40,7 +40,7 @@ class ProjectRepository {
         throw new Error('Project not found');
       }
     } catch (err) {
-      throw new Error('Update project error:', err);
+      throw new Error('Update project error:' + err);
     }
   }
 
@@ -54,7 +54,20 @@ class ProjectRepository {
         throw new Error('Project not found');
       }
     } catch (err) {
-      throw new Error('Delete project error:', err);
+      throw new Error('Delete project error:' + err);
+    }
+  }
+
+  async getProjectsByIds(ids) {
+    try {
+      const projects = await Project.findAll({
+        where: {
+          id: ids,
+        },
+      });
+      return projects;
+    } catch (err) {
+      throw new Error('Get projects by IDs error: ' + err.message);
     }
   }
 }

@@ -10,7 +10,7 @@ class GitHubService {
       const response = await axios.get(url);
       return response.data;
     } catch (err) {
-      throw new Error('Get repository error: ', err);
+      throw new Error(err.response.data.message);
     }
   }
 }

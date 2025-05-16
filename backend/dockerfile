@@ -10,5 +10,5 @@ COPY . .
 
 EXPOSE 4444
 
-CMD ["npm", "run", "dev"]
-# CMD ["sh", "-c", "npx sequelize-cli db:migrate && npm start"]
+# CMD ["npm", "run", "dev"]
+CMD ["sh", "-c", "npx sequelize-cli db:migrate && npm start"]

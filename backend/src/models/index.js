@@ -21,5 +21,5 @@ sequelize
     console.log('Sync');
   })
   .catch((error) => {
-    console.error('Error sync', error);
+    console.error('Error sync'+ error);
   });

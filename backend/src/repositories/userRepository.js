@@ -15,7 +15,7 @@ class UserRepository {
       const user = await User.findOne({ where: { email } });
       return user;
     } catch (err) {
-      throw new Error('Find user by email error: ', err.message);
+      throw new Error('Find user by email error: ' + err.message);
     }
   }
 }

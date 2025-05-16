@@ -13,8 +13,8 @@ services:
       - /app/node_modules
     depends_on:
       - postgres
-    command: ['npx', 'nodemon', 'src/index.js']
-    # command: ["sh", "-c", "npx sequelize-cli db:migrate && npm start"]
+    # command: ['npx', 'nodemon', 'src/index.js']
+    command: ["sh", "-c", "npx sequelize-cli db:migrate && npm start"]
 
   postgres:
     image: postgres:15

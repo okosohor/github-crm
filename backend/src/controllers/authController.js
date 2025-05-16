@@ -6,12 +6,7 @@ class AuthController {
       const { email, password } = req.body;
       const { accessToken, refreshToken } = await AuthService.login(email, password);
 
-      res.cookie('refreshToken', refreshToken, {
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24 * 10, // 10days
-      });
-
-      res.status(200).json({ message: 'Login complete', accessToken, refreshToken });
+      res.status(200).json({ accessToken, refreshToken });
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
@@ -39,7 +34,6 @@ class AuthController {
       const { accessToken, refreshToken } =
         await AuthService.refreshAccessToken(refreshTokenFromBody);
 
-      console.log(accessToken, refreshToken);
       res.status(200).json({ accessToken, refreshToken });
     } catch (err) {
       res.status(400).json({ message: err.message });
