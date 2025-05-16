@@ -7,7 +7,7 @@ This repository contains two main services:
 ---
 ## Required .env Files
 
-To run the project correctly, you need to create a `.env` file in the ./client and ./backend folders with the following variables:
+To run the project correctly, you need to create a `.env` and `pg.env` file in the ./client and ./backend folders with the following variables:
 
 BACKEND
 ```env
@@ -22,6 +22,13 @@ JWT_REFRESH_SECRET_KEY=github_crm_refresh_secret
 NODE_ENV=development
 GITHUB_BASE_URL='https://api.github.com'
 ```
+
+```pg.env
+POSTGRES_DB=mydb
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+```
+
 CLIENT
 ```env
 REACT_APP_API_URL=http://localhost:4444
