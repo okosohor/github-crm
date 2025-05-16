@@ -53,7 +53,7 @@ Start the backend server on port 4444
 ---
 
 ## Client
-Run the following command from the ./backend:
+Run the following command from the ./client:
 
 ```
 docker-compose up --build
