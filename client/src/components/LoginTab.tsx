@@ -17,13 +17,11 @@ export default function LoginTab() {
   }
 
   async function handleLogin(event: React.FormEvent) {
-
     setLoginError('');
-    setPasswordError('')
-    setEmailError('')
+    setPasswordError('');
+    setEmailError('');
 
-
-    event.preventDefault()
+    event.preventDefault();
     if (!validateEmail(email)) {
       setEmailError('Please enter a valid email');
       return;
@@ -34,7 +32,6 @@ export default function LoginTab() {
       return;
     }
 
-
     try {
       const { data } = await API.login({ email, password });
       const { accessToken, refreshToken } = data;
@@ -43,7 +40,7 @@ export default function LoginTab() {
       localStorage.setItem('refreshToken', refreshToken);
 
       navigate('/projects');
-    } catch (error:any) {
+    } catch (error: any) {
       setLoginError(error?.response?.data?.message || 'Login error');
     }
   }
@@ -52,7 +49,13 @@ export default function LoginTab() {
     <form className="flex justify-between flex-col h-full" onSubmit={handleLogin}>
       <div className="gap-5 flex flex-col">
         <Input type="email" error={emailError} name="email" value={email} handleChange={setEmail} />
-        <Input type="password" error={passwordError} name="password" value={password} handleChange={setPassword} />
+        <Input
+          type="password"
+          error={passwordError}
+          name="password"
+          value={password}
+          handleChange={setPassword}
+        />
       </div>
 
       {loginError && <p className="text-red-500 mt-1">{loginError}</p>}

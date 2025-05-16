@@ -38,7 +38,7 @@ export default function AuthWindow() {
           register
         </button>
       </div>
-       {activeTab === 'login' ? <LoginTab /> : <RegisterTab />}
+      {activeTab === 'login' ? <LoginTab /> : <RegisterTab />}
     </div>
   );
 }
