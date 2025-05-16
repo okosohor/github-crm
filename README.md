@@ -49,7 +49,9 @@ Start the PostgreSQL database
 Run database migrations using sequelize-cli
 
 Start the backend server on port 4444
+
 ---
+
 ##Client
 Run the following command from the ./backend:
 
