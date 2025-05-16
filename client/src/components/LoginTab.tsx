@@ -44,8 +44,7 @@ export default function LoginTab() {
 
       navigate('/projects');
     } catch (error:any) {
-      console.log(error)
-      setLoginError(error.response.data.message);
+      setLoginError(error?.response?.data?.message || 'Login error');
     }
   }
 

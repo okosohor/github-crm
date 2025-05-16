@@ -7,13 +7,11 @@ dotenv.config();
 
 class AuthService {
   async generateTokens(user) {
-    console.log('gen from', user);
     const data = {
       id: user.id,
       email: user.email,
     };
 
-    // TODO: add time
     const accessToken = jwt.sign(data, process.env.JWT_SECRET_KEY, { expiresIn: '30m' });
     const refreshToken = jwt.sign(data, process.env.JWT_REFRESH_SECRET_KEY, { expiresIn: '7d' });
 

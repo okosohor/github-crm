@@ -17,7 +17,6 @@ export default function ProjecstPage() {
         const response = await API.getAllProjects();
         setProjects(response.data);
       } catch (error: any) {
-        console.log(error?.response?.data?.message);
         setError(true);
       }
     };

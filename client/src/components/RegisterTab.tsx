@@ -53,7 +53,6 @@ export default function RegisterTab() {
       setConfirmPassword('')
       setRegisterMessage(data.message)
     } catch (error: any) {
-      console.log(error);
       setRegisterError(error.response?.data?.message || 'Registration failed');
     }
   }

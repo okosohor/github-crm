@@ -25,7 +25,6 @@ export default function AddProjectBlock({ addProject, removeAllProjectsFromList,
 
     try {
       const response = await API.createOrUpdateProject(url);
-      console.log(response)
 
      if(
       projects.find(project => project.id === response.data.id)
@@ -34,7 +33,6 @@ export default function AddProjectBlock({ addProject, removeAllProjectsFromList,
      } else {
        addProject(response.data);
      }
-      console.log('Project added', response.data);
 
       setUrl('');
       setError('');
@@ -43,7 +41,6 @@ export default function AddProjectBlock({ addProject, removeAllProjectsFromList,
         setError(err.response.data.message);
       } else {
         setError('Failed to add project. Please try again.');
-        console.log(err);
       }
     }
   }
@@ -53,7 +50,7 @@ export default function AddProjectBlock({ addProject, removeAllProjectsFromList,
       await API.deleteAllUserProjects();
       removeAllProjectsFromList()
     } catch (error) {
-      console.log(error)
+      setError('Something went wrong please try again later')
     }
   }
 

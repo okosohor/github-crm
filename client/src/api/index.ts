@@ -54,10 +54,8 @@ class ApiService {
     
             return this.axiosInstance(originalRequest); 
           } catch (refreshError) {
-            console.error('Failed to refresh token', refreshError);
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('accessToken');
-            console.log('remove token')
             window.dispatchEvent(new Event("removeTokens"));
             return Promise.reject(refreshError);
           }
@@ -66,7 +64,6 @@ class ApiService {
         if (error.response && error.response.status === 401 && originalRequest._retry) {
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('accessToken');
-            console.log('remove token')
             window.dispatchEvent(new Event("removeTokens"));
         }
     

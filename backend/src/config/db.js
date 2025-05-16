@@ -9,7 +9,6 @@ const sequelize = new Sequelize(DB_URL, {
 });
 
 const createDataBaseConection = async () => {
-  console.log('db url', DB_URL);
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
