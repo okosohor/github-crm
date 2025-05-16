@@ -43,6 +43,7 @@ export default function ProjectCard({ project, removeProject, updateProject }: P
           className="font-bold text-xl hover:text-blue-500 text-gray-500"
           target="_blank"
           href={url}
+          rel="noreferrer" 
         >
           {full_name}
         </a>

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import LoginTab from './LoginTab';
 import RegisterTab from './RegisterTab';
-import Button from 'ui/Button';
 
 export default function AuthWindow() {
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');

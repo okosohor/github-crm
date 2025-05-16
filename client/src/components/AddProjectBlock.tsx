@@ -28,7 +28,7 @@ export default function AddProjectBlock({ addProject, removeAllProjectsFromList,
       console.log(response)
 
      if(
-      projects.find(project => project.id== response.data.id)
+      projects.find(project => project.id === response.data.id)
      ) {
       updateProject(response.data.id, response.data)
      } else {
