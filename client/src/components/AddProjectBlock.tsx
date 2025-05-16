@@ -64,8 +64,8 @@ export default function AddProjectBlock({ addProject, removeAllProjectsFromList,
   }
 
   return (
-    <div className="md:w-1/4 flex flex-col border-b-2 md:border-b-0 md:border-l-2 border-gray-400 h-ful gap-2 md:gap-6 p-2 md:p-6">
-      <h2 className="text-gray-600 font-bold text-4xl mb-4">Add project</h2>
+    <div className="md:w-1/4 flex min-h-[250px] flex-col border-b-2 md:border-b-0 md:border-l-2 border-gray-400 h-ful gap-2 md:gap-6 p-2 md:p-6">
+      <h2 className="text-gray-600 font-bold text-2xl md:text-4xl md:mb-4">Add project</h2>
       <Input
         value={url}
         type="text"
