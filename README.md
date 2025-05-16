@@ -10,6 +10,8 @@ This repository contains two main services:
 To run the project correctly, you need to create a `.env` and `pg.env` files in the ./backend folder with the following variables:
 
 BACKEND
+
+
  .env
 ```env
 PORT=4444
