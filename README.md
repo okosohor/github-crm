@@ -7,7 +7,7 @@ This repository contains two main services:
 ---
 ## Required .env Files
 
-To run the project correctly, you need to create a `.env` and `pg.env` files in the ./client and ./backend folders with the following variables:
+To run the project correctly, you need to create a `.env` and `pg.env` files in the ./backend folder with the following variables:
 
 BACKEND
  .env
@@ -29,7 +29,7 @@ POSTGRES_DB=mydb
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 ```
-
+To run the project correctly, you need to create a `.env` file in the ./client folder with the following variables:
 CLIENT
 ```env
 REACT_APP_API_URL=http://localhost:4444
