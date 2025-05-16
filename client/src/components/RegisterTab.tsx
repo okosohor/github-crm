@@ -20,38 +20,40 @@ export default function RegisterTab() {
 
   async function handleRegister(event: React.FormEvent) {
     event.preventDefault();
-
+  
     setEmailError('');
     setPasswordError('');
     setConfirmPasswordError('');
     setRegisterError('');
-    setRegisterMessage('')
-;
-
+    setRegisterMessage('');
+  
+    let hasError = false;
+  
     if (!validateEmail(email)) {
       setEmailError('Please enter a valid email');
+      hasError = true;
     }
-
+  
     if (password.length < 4) {
       setPasswordError('Password must be at least 4 characters');
-
+      hasError = true;
     }
-
+  
     if (password !== confirmPassword) {
       setConfirmPasswordError('Passwords do not match');
-
+      hasError = true;
     }
-    
-    if(emailError || passwordError || confirmPasswordError || registerError ) {
-      return
+  
+    if (hasError) {
+      return;
     }
- 
+  
     try {
       const { data } = await API.register({ email, password });
-      setEmail('')
-      setPassword('')
-      setConfirmPassword('')
-      setRegisterMessage(data.message)
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      setRegisterMessage(data.message);
     } catch (error: any) {
       setRegisterError(error.response?.data?.message || 'Registration failed');
     }
