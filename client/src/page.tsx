@@ -1,3 +1,4 @@
+import API from 'api';
 import React, { useState } from 'react';
 
 function Page() {
@@ -6,70 +7,98 @@ function Page() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [url, setUrl] = useState('');
 
   const handleEmailChange = (e:any) => {
     setEmail(e.target.value);
+  };
+
+  const handleUrlChange = (e:any) => {
+    setUrl(e.target.value);
   };
 
   const handlePasswordChange = (e:any) => {
     setPassword(e.target.value);
   };
 
-  const handleRegister = (e:any) => {
-    e.preventDefault(); 
+  // Register User
+  const handleRegister = async (e:any) => {
+    e.preventDefault();
 
-    fetch(`${apiUrl}/user/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Registration failed');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setSuccessMessage('Registration successful!');
-        setErrorMessage('');
-      })
-      .catch((error) => {
-        setErrorMessage(error.message);
-        setSuccessMessage('');
-      });
+
+    try {
+      await API.register({email, password})
+    } catch (error) {
+      console.log(error)
+    }
+
+    // fetch(`${apiUrl}/user/register`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     email,
+    //     password,
+    //   }),
+    // })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error('Registration failed');
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     setSuccessMessage('Registration successful!');
+    //     setErrorMessage('');
+    //   })
+    //   .catch((error) => {
+    //     setErrorMessage(error.message);
+    //     setSuccessMessage('');
+    //   });
   };
 
-  const handleLogin = (e:any) => {
-    e.preventDefault(); 
-    fetch(`${apiUrl}/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Login failed');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setSuccessMessage('Login successful!');
-        setErrorMessage('');
-      })
-      .catch((error) => {
-        setErrorMessage(error.message);
-        setSuccessMessage('');
-      });
+  // Login User
+  const handleLogin = async (e:any) => {
+    e.preventDefault();
+    try {
+      const { data } = await API.login({email, password})
+      const {accessToken, refreshToken} = data
+
+
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+
+      // const {refreshToken, accessToken} = {data}
+      console.log(data)
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  const handleRefresh = async (e:any) => {
+    
+    try {
+      const { data } = await  API.refreshTokens();
+      const {accessToken, refreshToken} = data
+
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  const handleCreate = async (e:any) => {
+    e.preventDefault();
+
+    try {
+      await API.createOrUpdateProject(url)
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (
@@ -124,8 +153,24 @@ function Page() {
         <button type="submit">Login</button>
       </form>
 
+      <h2>URL Form</h2>
+      <form onSubmit={handleCreate}>
+        <div>
+          <label>URL </label>
+          <input
+            type="text"
+            value={url}
+            onChange={handleUrlChange}
+            placeholder="Enter URL"
+            required
+          />
+        </div>
+        <button type="submit">Create Project</button>
+      </form>
+
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+      <button onClick={handleRefresh}>refresh</button>
     </div>
   );
 }
