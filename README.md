@@ -1,4 +1,4 @@
-# Monorepo Project (Frontend + Backend)
+#GitHub CRM (Frontend + Backend)
 
 This repository contains two main services:  
 - **backend** — Node.js server using Sequelize and PostgreSQL  
