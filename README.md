@@ -5,16 +5,6 @@ This repository contains two main services:
 - **client** — frontend application located in a separate folder
 
 ---
-
-## Project Structure
-
-/
-├── backend/ # Backend service
-├── client/ # Frontend application
-└── README.md
-
----
-
 ## Required .env Files
 
 To run the project correctly, you need to create a `.env` file in the ./client and ./backend folders with the following variables:
@@ -31,11 +21,11 @@ JWT_SECRET_KEY=github_crm_secret
 JWT_REFRESH_SECRET_KEY=github_crm_refresh_secret
 NODE_ENV=development
 GITHUB_BASE_URL='https://api.github.com'
-
+```
 CLIENT
 ```env
 REACT_APP_API_URL=http://localhost:4444
-
+```
 Note:
 Please create it locally before running the project.
 
