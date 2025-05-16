@@ -63,9 +63,11 @@ Start the backend server on port 4444
 ## Client
 Run the following command from the ./client:
 
+
 ```
 docker-compose up --build
 ```
+Start the client on localhost:3000
 
 To stop the containers:
 
