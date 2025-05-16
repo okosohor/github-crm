@@ -26,12 +26,12 @@ CLIENT
 ```env
 REACT_APP_API_URL=http://localhost:4444
 ```
----
 Note:
 Please create it locally before running the project.
 
+---
 
-##Running the Project with Docker Compose
+## Running the Project with Docker Compose
 Make sure you have Docker and Docker Compose installed.
 
 Run the following command from the ./backend:
@@ -52,7 +52,7 @@ Start the backend server on port 4444
 
 ---
 
-##Client
+## Client
 Run the following command from the ./backend:
 
 ```
