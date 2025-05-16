@@ -1,0 +1,10 @@
+
+use correct status code for all cases
+use transactions for create project service
+set refresh token in cookie
+add validation for all cases (zod)
+rewrite with ts 
+use react query
+add useMemo and useCalback
+add mobileView
+add state management for front
