@@ -26,17 +26,20 @@ CLIENT
 ```env
 REACT_APP_API_URL=http://localhost:4444
 ```
+---
 Note:
 Please create it locally before running the project.
 
 
-Running the Project with Docker Compose
+##Running the Project with Docker Compose
 Make sure you have Docker and Docker Compose installed.
 
 Run the following command from the ./backend:
 
-bash
+```
 docker-compose up --build
+```
+
 This command will:
 
 Build the backend service
@@ -46,14 +49,16 @@ Start the PostgreSQL database
 Run database migrations using sequelize-cli
 
 Start the backend server on port 4444
-
-Cliend
+---
+##Client
 Run the following command from the ./backend:
 
-bash
+```
 docker-compose up --build
+```
 
 To stop the containers:
 
-bash
+```
 docker-compose down
+```
